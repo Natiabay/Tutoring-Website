@@ -13,7 +13,7 @@ import {
   ClockIcon,
   ComputerDesktopIcon
 } from '@heroicons/react/24/outline'
-// import { submitContactForm } from '@/lib/contactService' // Uncomment when Firebase is installed
+
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -42,10 +42,7 @@ export default function Contact() {
     setSubmitStatus('idle')
     
     try {
-      // TODO: Uncomment when Firebase is installed
-      // await submitContactForm(formData)
-      
-      // For now, simulate form submission
+      // Simulate form submission for now
       await new Promise(resolve => setTimeout(resolve, 2000))
       
       // Simulate successful submission
