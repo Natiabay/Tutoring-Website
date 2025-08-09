@@ -161,9 +161,9 @@ export default function Contact() {
               </h2>
               
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="block text-sm font-semibold text-gray-800 mb-2">
                       Full Name *
                     </label>
                     <input
@@ -173,13 +173,13 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-enat-purple focus:border-transparent"
+                      className="w-full px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-enat-gold focus:border-enat-gold transition-all duration-300 bg-gray-50 focus:bg-white hover:border-gray-300"
                       placeholder="Enter your full name"
                     />
                   </div>
                   
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                  <div className="space-y-2">
+                    <label htmlFor="phone" className="block text-sm font-semibold text-gray-800 mb-2">
                       Phone Number *
                     </label>
                     <input
@@ -189,15 +189,15 @@ export default function Contact() {
                       value={formData.phone}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-enat-purple focus:border-transparent"
+                      className="w-full px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-enat-gold focus:border-enat-gold transition-all duration-300 bg-gray-50 focus:bg-white hover:border-gray-300"
                       placeholder="Enter your phone number"
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="block text-sm font-semibold text-gray-800 mb-2">
                       Email Address
                     </label>
                     <input
@@ -206,13 +206,13 @@ export default function Contact() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-enat-purple focus:border-transparent"
+                      className="w-full px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-enat-gold focus:border-enat-gold transition-all duration-300 bg-gray-50 focus:bg-white hover:border-gray-300"
                       placeholder="Enter your email address"
                     />
                   </div>
                   
-                  <div>
-                    <label htmlFor="grade" className="block text-sm font-medium text-gray-700 mb-2">
+                  <div className="space-y-2">
+                    <label htmlFor="grade" className="block text-sm font-semibold text-gray-800 mb-2">
                       Student Grade *
                     </label>
                     <select
@@ -221,7 +221,7 @@ export default function Contact() {
                       value={formData.grade}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-enat-purple focus:border-transparent"
+                      className="w-full px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-enat-gold focus:border-enat-gold transition-all duration-300 bg-gray-50 focus:bg-white hover:border-gray-300"
                     >
                       <option value="">Select Grade</option>
                       {grades.map(grade => (
@@ -231,8 +231,8 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                <div className="space-y-2">
+                  <label htmlFor="subject" className="block text-sm font-semibold text-gray-800 mb-2">
                     Subject(s) of Interest
                   </label>
                   <select
@@ -240,7 +240,7 @@ export default function Contact() {
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-enat-purple focus:border-transparent"
+                    className="w-full px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-enat-gold focus:border-enat-gold transition-all duration-300 bg-gray-50 focus:bg-white hover:border-gray-300"
                   >
                     <option value="">Select Subject</option>
                     {subjects.map(subject => (
@@ -249,8 +249,8 @@ export default function Contact() {
                   </select>
                 </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                <div className="space-y-2">
+                  <label htmlFor="message" className="block text-sm font-semibold text-gray-800 mb-2">
                     Message
                   </label>
                   <textarea
@@ -258,19 +258,33 @@ export default function Contact() {
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-enat-purple focus:border-transparent"
+                    rows={5}
+                    className="w-full px-5 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-enat-gold focus:border-enat-gold transition-all duration-300 bg-gray-50 focus:bg-white hover:border-gray-300 resize-none"
                     placeholder="Tell us about your needs, goals, or any specific questions..."
                   />
                 </div>
 
-                <button
+                <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full btn-primary py-4 text-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                </button>
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Send Message</span>
+                      <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
+                    </>
+                  )}
+                </motion.button>
 
                 {submitStatus === 'success' && (
                   <motion.div

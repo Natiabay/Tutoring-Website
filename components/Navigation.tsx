@@ -37,36 +37,59 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-enat-black hover:text-enat-purple transition-colors duration-300 font-medium"
+                className="relative px-4 py-2 text-base font-medium text-enat-black hover:text-enat-purple transition-all duration-300 rounded-lg hover:bg-gray-50 group"
               >
                 {item.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-enat-gold to-enat-purple transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
+          </div>
+
+          {/* Desktop CTA Buttons */}
+          <div className="hidden lg:flex items-center space-x-4">
             <a
               href="tel:0954709885"
-              className="btn-primary flex items-center space-x-2"
+              className="flex items-center space-x-2 px-4 py-2 text-enat-purple font-medium hover:bg-enat-purple/5 rounded-lg transition-all duration-300 group"
             >
-              <PhoneIcon className="w-4 h-4" />
+              <PhoneIcon className="w-4 h-4 group-hover:scale-110 transition-transform" />
               <span>Call Now</span>
             </a>
+            
+            <Link href="/contact" className="btn-primary text-base px-6 py-3 group">
+              <span>Get Started</span>
+              <motion.svg 
+                className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </motion.svg>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
-          <button
+          <motion.button
+            whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="lg:hidden p-3 rounded-xl text-gray-600 hover:text-enat-purple hover:bg-gray-100 transition-all duration-300"
           >
-            {isOpen ? (
-              <XMarkIcon className="w-6 h-6" />
-            ) : (
-              <Bars3Icon className="w-6 h-6" />
-            )}
-          </button>
+            <motion.div
+              animate={{ rotate: isOpen ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {isOpen ? (
+                <XMarkIcon className="w-6 h-6" />
+              ) : (
+                <Bars3Icon className="w-6 h-6" />
+              )}
+            </motion.div>
+          </motion.button>
         </div>
 
         {/* Mobile Navigation */}
