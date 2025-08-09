@@ -204,9 +204,9 @@ export default function Home() {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-8 text-purple-100">
-              <a href="https://www.enattutor.com" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 hover:text-enat-gold transition-colors">
+              <a href="https://www.enattutors.com" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 hover:text-enat-gold transition-colors">
                 <GlobeAltIcon className="w-5 h-5" />
-                <span>www.enattutor.com</span>
+                <span>www.enattutors.com</span>
               </a>
               <span className="hidden sm:block">•</span>
               <span>Addis Ababa, Ethiopia</span>

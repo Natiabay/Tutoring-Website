@@ -98,8 +98,8 @@ export default function Contact() {
     {
       icon: GlobeAltIcon,
       title: 'Website',
-      value: 'www.enattutor.com',
-      link: 'https://www.enattutor.com',
+      value: 'www.enattutors.com',
+      link: 'https://www.enattutors.com',
       description: 'Visit our website'
     },
     {

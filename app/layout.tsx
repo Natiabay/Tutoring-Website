@@ -16,14 +16,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://www.enattutor.com'),
+  metadataBase: new URL('https://www.enattutors.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'Enat Tutor - Serving with Care!',
     description: 'Personalized Tutoring with a Mother\'s Care. Grades 1-12 in Addis Ababa, Ethiopia.',
-    url: 'https://www.enattutor.com',
+    url: 'https://www.enattutors.com',
     siteName: 'Enat Tutor',
     images: [
       {
