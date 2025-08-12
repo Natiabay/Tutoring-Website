@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import Navigation from '@/components/Navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Enat Tutor - Serving with Care!',
-  description: 'Personalized Tutoring with a Mother\'s Care. Grades 1-12 in Addis Ababa, Ethiopia. Online and in-person tutoring by AAU graduates.',
-  keywords: 'tutoring, education, Addis Ababa, Ethiopia, online tutoring, personalized learning',
+  title: 'Enat Tutor - Transform Your Future with Excellence',
+  description: 'Premium Tutoring Services in Addis Ababa. Grades 1-12 with personalized learning, expert tutors, and flexible scheduling. Start your success journey today!',
+  keywords: 'tutoring, education, Addis Ababa, Ethiopia, online tutoring, personalized learning, AAU graduates',
   authors: [{ name: 'Enat Tutor' }],
   creator: 'Enat Tutor',
   publisher: 'Enat Tutor',
@@ -16,21 +17,21 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://www.enattutors.com'),
+  metadataBase: new URL('https://www.enattutor.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Enat Tutor - Serving with Care!',
-    description: 'Personalized Tutoring with a Mother\'s Care. Grades 1-12 in Addis Ababa, Ethiopia.',
-    url: 'https://www.enattutors.com',
+    title: 'Enat Tutor - Transform Your Future with Excellence',
+    description: 'Premium Tutoring Services in Addis Ababa. Grades 1-12 with personalized learning, expert tutors, and flexible scheduling.',
+    url: 'https://www.enattutor.com',
     siteName: 'Enat Tutor',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Enat Tutor - Personalized Tutoring with a Mother\'s Care',
+        alt: 'Enat Tutor - Premium Tutoring Services in Addis Ababa',
       },
     ],
     locale: 'en_US',
@@ -38,8 +39,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Enat Tutor - Serving with Care!',
-    description: 'Personalized Tutoring with a Mother\'s Care. Grades 1-12 in Addis Ababa, Ethiopia.',
+    title: 'Enat Tutor - Transform Your Future with Excellence',
+    description: 'Premium Tutoring Services in Addis Ababa. Grades 1-12 with personalized learning, expert tutors, and flexible scheduling.',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -71,6 +72,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={inter.className}>
+        <Navigation />
         {children}
       </body>
     </html>

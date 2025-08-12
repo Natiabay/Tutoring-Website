@@ -1,135 +1,136 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Bars3Icon, XMarkIcon, PhoneIcon } from '@heroicons/react/24/outline'
+import { useState, useEffect } from 'react'
 
-const Navigation = () => {
+export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'Services', href: '/services' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
+    { href: '#home', label: 'Home' },
+    { href: '#services', label: 'Services' },
+    { href: '#packages', label: 'Packages' },
+    { href: '#contact', label: 'Contact' }
   ]
 
+  const smoothScroll = (href: string) => {
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+    setIsOpen(false)
+  }
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-lg">
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-16">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled 
+          ? 'bg-white/95 backdrop-blur-md shadow-2xl' 
+          : 'bg-white/80 backdrop-blur-sm'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center space-x-2"
-            >
-              <div className="w-10 h-10 bg-gradient-to-br from-enat-gold to-enat-purple rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">E</span>
+          <div className="flex items-center space-x-3 hover:scale-105 transition-all duration-300">
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-2xl transform hover:rotate-12 transition-all duration-500 overflow-hidden">
+              <img 
+                src="/Logo.png" 
+                alt="Enat Tutor Logo" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <div className="text-2xl font-black text-gray-800">
+                Enat <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-purple-600 bg-clip-text text-transparent">Tutor</span>
               </div>
-              <span className="text-xl font-bold text-enat-black">
-                Enat <span className="text-gradient">Tutor</span>
-              </span>
-            </motion.div>
-          </Link>
+              <div className="text-xs text-gray-500 font-medium">Serving with Care!</div>
+            </div>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
+            {navItems.map((item, index) => (
+              <a
+                key={item.href}
                 href={item.href}
-                className="relative px-4 py-2 text-base font-medium text-enat-black hover:text-enat-purple transition-all duration-300 rounded-lg hover:bg-gray-50 group"
+                onClick={(e) => {
+                  e.preventDefault()
+                  smoothScroll(item.href)
+                }}
+                className="text-gray-700 hover:text-purple-600 transition-all duration-300 font-semibold relative group hover:-translate-y-1"
               >
-                {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-enat-gold to-enat-purple transition-all duration-300 group-hover:w-full"></span>
-              </Link>
+                {item.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
+              </a>
             ))}
           </div>
 
-          {/* Desktop CTA Buttons */}
+          {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
             <a
-              href="tel:0954709885"
-              className="flex items-center space-x-2 px-4 py-2 text-enat-purple font-medium hover:bg-enat-purple/5 rounded-lg transition-all duration-300 group"
+              href="tel:0989806015"
+              className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-500 transform hover:scale-110 hover:shadow-2xl shadow-xl flex items-center space-x-2"
             >
-              <PhoneIcon className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <span>📞</span>
               <span>Call Now</span>
             </a>
-            
-            <Link href="/contact" className="btn-primary text-base px-6 py-3 group">
-              <span>Get Started</span>
-              <motion.svg 
-                className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </motion.svg>
-            </Link>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="lg:hidden p-2 rounded-lg bg-gradient-to-r from-yellow-400 to-purple-600 text-white"
+            >
+              {isOpen ? '✕' : '☰'}
+            </button>
           </div>
 
-          {/* Mobile menu button */}
-          <motion.button
-            whileTap={{ scale: 0.95 }}
+          {/* Mobile Menu Button */}
+          <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-3 rounded-xl text-gray-600 hover:text-enat-purple hover:bg-gray-100 transition-all duration-300"
+            className="lg:hidden p-2 rounded-lg bg-gradient-to-r from-yellow-400 to-purple-600 text-white"
           >
-            <motion.div
-              animate={{ rotate: isOpen ? 180 : 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {isOpen ? (
-                <XMarkIcon className="w-6 h-6" />
-              ) : (
-                <Bars3Icon className="w-6 h-6" />
-              )}
-            </motion.div>
-          </motion.button>
+            {isOpen ? '✕' : '☰'}
+          </button>
         </div>
-
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden border-t border-gray-200"
-            >
-              <div className="py-4 space-y-4">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className="block px-4 py-2 text-enat-black hover:text-enat-purple hover:bg-gray-50 rounded-lg transition-colors"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-                <div className="px-4">
-                  <a
-                    href="tel:0954709885"
-                    onClick={() => setIsOpen(false)}
-                    className="btn-primary w-full flex items-center justify-center space-x-2"
-                  >
-                    <PhoneIcon className="w-4 h-4" />
-                    <span>Call Now</span>
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-200">
+          <div className="px-4 py-6 space-y-4">
+            {navItems.map((item, index) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={(e) => {
+                  e.preventDefault()
+                  smoothScroll(item.href)
+                }}
+                className="block text-gray-700 hover:text-purple-600 font-medium py-2 transition-colors duration-300"
+              >
+                {item.label}
+              </a>
+            ))}
+            
+            {/* Mobile CTA */}
+            <a
+              href="tel:0989806015"
+              className="block bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-bold py-3 px-6 rounded-full text-center mt-6"
+            >
+              Call 0989806015
+            </a>
+          </div>
+        </div>
+      )}
     </nav>
   )
-}
-
-export default Navigation 
+} 
